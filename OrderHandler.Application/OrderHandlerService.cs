@@ -1,31 +1,29 @@
-using OrderHandler.AddOrder.CalculateOrderPrice;
-using OrderHandler.AddOrder.ValidateOrder;
+using OrderHandler.Application.AddOrder.CalculateOrderPrice;
+using OrderHandler.Application.AddOrder.ValidateOrder;
 using OrderHandler.Core.Converters;
 using OrderHandler.Core.Models;
 using OrderHandler.DataAccess;
 
-namespace OrderHandler;
+namespace OrderHandler.Application;
 
 public class OrderHandlerService : IOrderHandlerService
 {
     private readonly IOrderDbContext _orderDbContext;
     private readonly IOrderPriceService _orderPriceService;
-    private readonly IValidationService _validationService;
+    private readonly IOrderRequestValidationService _orderRequestValidationService;
 
     public OrderHandlerService(
         IOrderDbContext orderDbContext,
-        IOrderPriceService orderPriceService, 
-        IValidationService validationService)
+        IOrderPriceService orderPriceService,
+        IOrderRequestValidationService orderRequestValidationService)
     {
         _orderDbContext = orderDbContext;
         _orderPriceService = orderPriceService;
-        _validationService = validationService;
+        _orderRequestValidationService = orderRequestValidationService;
     }
 
     public Order PlaceAnOrder(OrderRequest orderRequest)
     {
-        _validationService.IsValidOrder(orderRequest);
-
         var order = orderRequest.ConvertToOrder();
 
         order.Price = _orderPriceService.CalculatePrice(order.KitVariant, order.Quantity);

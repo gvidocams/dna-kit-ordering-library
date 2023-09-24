@@ -1,6 +1,6 @@
 using OrderHandler.Core.Enums;
 
-namespace OrderHandler.AddOrder.GetKitVariantPrice;
+namespace OrderHandler.Application.AddOrder.GetKitVariantPrice;
 
 public class KitVariantPriceService : IKitVariantPriceService
 {

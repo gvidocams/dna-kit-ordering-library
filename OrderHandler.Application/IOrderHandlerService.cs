@@ -1,6 +1,6 @@
 using OrderHandler.Core.Models;
 
-namespace OrderHandler;
+namespace OrderHandler.Application;
 
 public interface IOrderHandlerService
 {

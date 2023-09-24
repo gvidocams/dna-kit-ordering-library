@@ -1,9 +1,9 @@
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
-using OrderHandler.AddOrder.CalculateOrderPrice;
-using OrderHandler.AddOrder.GetKitVariantPrice;
-using OrderHandler.AddOrder.GetOrderDiscount;
+using OrderHandler.Application.AddOrder.CalculateOrderPrice;
+using OrderHandler.Application.AddOrder.GetKitVariantPrice;
+using OrderHandler.Application.AddOrder.GetOrderDiscount;
 using OrderHandler.Core.Enums;
 
 namespace OrderHandler.Tests;

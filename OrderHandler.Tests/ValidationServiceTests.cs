@@ -1,21 +1,22 @@
 using FluentAssertions;
 using NUnit.Framework;
-using OrderHandler.AddOrder.ValidateOrder;
+using OrderHandler.Application.AddOrder.ValidateOrder;
+using OrderHandler.Application.AddOrder.ValidateOrder.Results;
 using OrderHandler.Core.Models;
 
 namespace OrderHandler.Tests;
 
 public class ValidationServiceTests
 {
-    private readonly IValidationService _validationService;
+    private readonly IOrderRequestValidationService _orderRequestValidationService;
     
     public ValidationServiceTests()
     {
-        _validationService = new ValidationService();
+        _orderRequestValidationService = new OrderRequestValidationService();
     }
     
     [Test]
-    public void IsValidOrder_ValidOrderRequest_ShouldNotThrowException()
+    public void IsValidOrder_ValidOrderRequest_ShouldReturnSuccessValidationResult()
     {
         var oneHourInTheFuture = DateTime.Now.AddHours(1);
 
@@ -26,13 +27,13 @@ public class ValidationServiceTests
             ExpectedDeliveryDate = oneHourInTheFuture
         };
 
-        var action = () => _validationService.IsValidOrder(orderRequest);
+        var response = _orderRequestValidationService.Validate(orderRequest);
 
-        action.Should().NotThrow();
+        response.Should().BeOfType<SuccessValidationResult>();
     }
 
     [Test]
-    public void IsValidOrder_ExpectedDeliveryDateNotInFuture_ThrowsArgumentException()
+    public void IsValidOrder_ExpectedDeliveryDateNotInFuture_ShouldReturnFailedValidationResult()
     {
         var orderRequest = new OrderRequest
         {
@@ -41,16 +42,18 @@ public class ValidationServiceTests
             ExpectedDeliveryDate = DateTime.Now
         };
         
-        var action = () => _validationService.IsValidOrder(orderRequest);
+        var response = _orderRequestValidationService.Validate(orderRequest);
 
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("Expected delivery date must be in the future! (Parameter 'ExpectedDeliveryDate')");
+        response.Should().BeEquivalentTo(new FailedValidationResult
+        {
+            ErrorMessage = "Expected delivery date must be in the future!"
+        });
     }
 
     [TestCase(-5)]
     [TestCase(0)]
     [TestCase(1000)]
-    public void IsValidOrder_QuantityOutOfRange_ThrowsArgumentOutOfRangeException(int quantity)
+    public void IsValidOrder_QuantityOutOfRange_ShouldReturnFailedValidationResult(int quantity)
     {
         var orderRequest = new OrderRequest
         {
@@ -59,20 +62,11 @@ public class ValidationServiceTests
             ExpectedDeliveryDate = DateTime.Now.AddHours(1)
         };
         
-        var action = () => _validationService.IsValidOrder(orderRequest);
+        var response = _orderRequestValidationService.Validate(orderRequest);
 
-        action.Should().Throw<ArgumentOutOfRangeException>()
-            .WithMessage("Kit quantity must be between the ranges of 1 to 999! (Parameter 'Quantity')");
-    }
-
-    [Test]
-    public void IsValidOrder_OrderRequestIsNull_ThrowArgumentNullException()
-    {
-        OrderRequest? orderRequest = null;
-        
-        var action = () => _validationService.IsValidOrder(orderRequest!);
-
-        action.Should().Throw<ArgumentNullException>()
-            .WithMessage("Order request can't be null! (Parameter 'orderRequest')");
+        response.Should().BeEquivalentTo(new FailedValidationResult
+        {
+            ErrorMessage = "Kit quantity must be between the ranges of 1 to 999! (Parameter 'Quantity')"
+        });
     }
 }

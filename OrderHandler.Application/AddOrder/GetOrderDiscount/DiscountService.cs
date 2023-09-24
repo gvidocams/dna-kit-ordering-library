@@ -1,6 +1,6 @@
 using OrderHandler.Core.Models;
 
-namespace OrderHandler.AddOrder.GetOrderDiscount;
+namespace OrderHandler.Application.AddOrder.GetOrderDiscount;
 
 public class DiscountService : IDiscountService
 {

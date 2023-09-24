@@ -1,6 +1,6 @@
 using FluentAssertions;
 using NUnit.Framework;
-using OrderHandler.AddOrder.GetOrderDiscount;
+using OrderHandler.Application.AddOrder.GetOrderDiscount;
 
 namespace OrderHandler.Tests;
 

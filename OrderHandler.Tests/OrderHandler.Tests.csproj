@@ -19,7 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\OrderHandler\OrderHandler.csproj" />
+      <ProjectReference Include="..\OrderHandler.Application\OrderHandler.Application.csproj" />
     </ItemGroup>
 
 </Project>

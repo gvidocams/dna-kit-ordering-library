@@ -1,6 +1,6 @@
 using FluentAssertions;
 using NUnit.Framework;
-using OrderHandler.AddOrder.GetKitVariantPrice;
+using OrderHandler.Application.AddOrder.GetKitVariantPrice;
 using OrderHandler.Core.Enums;
 
 namespace OrderHandler.Tests;

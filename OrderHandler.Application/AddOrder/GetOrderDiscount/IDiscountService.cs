@@ -1,4 +1,4 @@
-namespace OrderHandler.AddOrder.GetOrderDiscount;
+namespace OrderHandler.Application.AddOrder.GetOrderDiscount;
 
 public interface IDiscountService
 {

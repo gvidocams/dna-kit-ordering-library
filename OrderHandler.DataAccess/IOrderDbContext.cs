@@ -4,6 +4,6 @@ namespace OrderHandler.DataAccess;
 
 public interface IOrderDbContext
 {
-    void AddOrder(Order order);
+    void AddOrder(Order orderResponse);
     IEnumerable<Order> GetCustomerOrders(int customerId);
 }

@@ -11,9 +11,9 @@ public class OrderDbContext : IOrderDbContext
         _orders = orders;
     }
 
-    public void AddOrder(Order order)
+    public void AddOrder(Order orderResponse)
     {
-        _orders.Add(order);
+        _orders.Add(orderResponse);
     }
 
     public IEnumerable<Order> GetCustomerOrders(int customerId)

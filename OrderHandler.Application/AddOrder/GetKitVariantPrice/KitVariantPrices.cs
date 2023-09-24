@@ -1,4 +1,4 @@
-namespace OrderHandler.AddOrder.GetKitVariantPrice;
+namespace OrderHandler.Application.AddOrder.GetKitVariantPrice;
 
 public static class KitVariantPrices
 {

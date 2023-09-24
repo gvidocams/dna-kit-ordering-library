@@ -1,8 +1,8 @@
-using OrderHandler.AddOrder.GetKitVariantPrice;
-using OrderHandler.AddOrder.GetOrderDiscount;
+using OrderHandler.Application.AddOrder.GetKitVariantPrice;
+using OrderHandler.Application.AddOrder.GetOrderDiscount;
 using OrderHandler.Core.Enums;
 
-namespace OrderHandler.AddOrder.CalculateOrderPrice;
+namespace OrderHandler.Application.AddOrder.CalculateOrderPrice;
 
 public class OrderPriceService : IOrderPriceService
 {
