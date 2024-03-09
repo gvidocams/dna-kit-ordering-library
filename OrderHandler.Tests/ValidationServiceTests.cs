@@ -66,7 +66,7 @@ public class ValidationServiceTests
 
         response.Should().BeEquivalentTo(new FailedValidationResult
         {
-            ErrorMessage = "Kit quantity must be between the ranges of 1 to 999! (Parameter 'Quantity')"
+            ErrorMessage = "Kit quantity must be between the ranges of 1 to 999!"
         });
     }
 }
